@@ -18,8 +18,8 @@ In conclusion, this is a problem I am personally facing and I hope this project 
 
 ### User Stories
 - As a user, I want to be able to browse recipes from the preset.
-- As a user, I want to be able to save recipes I enjoyed to my collection.
-- As a user, I want to be able to add/replace/remove certain ingredients from recipes.
+- As a user, I want to be able to save recipes I enjoyed to my favorites collection.
+- As a user, I want to be able to remove certain ingredients from recipes.
 - As a user, I want to be able to filter recipe presets for certain allergies or dietary restrictions.
 
 
