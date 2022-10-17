@@ -106,6 +106,7 @@ public class RecipeApp {
         String userFav = input.next();
         Recipe favRecipe = recipesList.getRecipeByNum(Integer.parseInt(userFav));
         favorites.add(favRecipe);
+        System.out.println("Added to favorites!");
     }
 
     public void printR() {

@@ -130,7 +130,6 @@ public class RecipeBook {
                 break;
             }
         }
-        System.out.println("Added to Favorites");
         return recipeMatch;
     }
 

@@ -1,13 +1,16 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 import model.Ingredient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import model.Recipe;
 
 class RecipeTest {
@@ -16,7 +19,7 @@ class RecipeTest {
 
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         vegIngr = new ArrayList<>();
         ArrayList<String> ingredientNames = new ArrayList<>(
                 Arrays.asList("garlic", "soysauce", "bellpepper", "paprika", "onion", "mushrooms", "tortilla"));
@@ -25,7 +28,7 @@ class RecipeTest {
             ing = new Ingredient(i);
             vegIngr.add(ing);
         }
-        r = new Recipe("Vegetable Fajitas",true,true,false, vegIngr,2);
+        r = new Recipe("Vegetable Fajitas", true, true, false, vegIngr, 2);
     }
 
     @Test
@@ -46,9 +49,17 @@ class RecipeTest {
         assertEquals(2, r.getRecipeNumber());
     }
 
+    @Test
+    void testGetIngredientsString() {
+        ArrayList<String> ingredientNames = new ArrayList<>(
+                Arrays.asList("garlic", "soysauce", "bellpepper", "paprika", "onion", "mushrooms", "tortilla"));
+        assertEquals(r.getIngredientsString(), ingredientNames);
+
+    }
+
 
     @Test
-    void testRemoveIngredient(){
+    void testRemoveIngredient() {
         ArrayList<String> ingString = r.getIngredientsString();
         assertTrue(ingString.contains("garlic"));
         r.removeIngredient("garlic");
