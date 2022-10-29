@@ -121,7 +121,7 @@ public class RecipeApp {
     // MODIFIES: this
     // EFFECTS: adds fav recipe to state
     private void addFavToState(Recipe r) {
-        while (!favorites.contains(r)) {
+        if (!ms.getFav().contains(r)) {
             ms.addFavorites(r);
         }
     }
