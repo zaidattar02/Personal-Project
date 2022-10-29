@@ -1,0 +1,33 @@
+{
+    "edited": [{
+        "number": 1,
+        "nuts": false,
+        "Ingredients": [
+            {"name": "chicken"},
+            {"name": "pasta"},
+            {"name": "butter"},
+            {"name": "oregano"},
+            {"name": "basil"},
+            {"name": "parmesan"}
+        ],
+        "name": "Chicken Alfredo Pasta",
+        "halal": true,
+        "vegan": false
+    }],
+    "name": "My State",
+    "fav": [{
+        "number": 1,
+        "nuts": false,
+        "Ingredients": [
+            {"name": "chicken"},
+            {"name": "pasta"},
+            {"name": "butter"},
+            {"name": "oregano"},
+            {"name": "basil"},
+            {"name": "parmesan"}
+        ],
+        "name": "Chicken Alfredo Pasta",
+        "halal": true,
+        "vegan": false
+    }]
+}

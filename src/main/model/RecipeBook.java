@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents a preset of recipes of type Recipe
 public class RecipeBook {
@@ -65,12 +68,14 @@ public class RecipeBook {
         }
     }
 
+    //EFFECTS: loops through each recipe in list of recipes and prints its name using method getRecipeName
     public void printRecipeNames() {
         for (Recipe r : recipes) {
             System.out.println(String.valueOf(r.getRecipeNumber()) + ':' + r.getRecipeName());
         }
     }
 
+    //EFFECTS: returns recipe names ArrayList of type strings
     public ArrayList<String> getRecipeNames() {
         ArrayList<String> recipeNames = new ArrayList<>();
         for (Recipe r : recipes) {
@@ -79,6 +84,7 @@ public class RecipeBook {
         return recipeNames;
     }
 
+    //EFFECTS: loops through each recipe in list of recipes and prints out its name and list of ingredients
     public void printRecipes() {
         for (Recipe r : recipes) {
             System.out.println("Recipe " + r.getRecipeName());
@@ -92,6 +98,11 @@ public class RecipeBook {
 
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: creates new list of type string and loops through it to add each ingredient into ingredient list
+     * of type Ingredient.
+     */
     public void createChkIngredientList(ArrayList<Ingredient> ingList) {
         ArrayList<String> ingredientNames = new ArrayList<String>(
                 Arrays.asList("chicken", "pasta", "butter", "oregano", "basil", "parmesan"));
@@ -102,6 +113,11 @@ public class RecipeBook {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: creates new list of type string and loops through it to add each ingredient into ingredient list
+     * of type Ingredient.
+     */
     public void createPrkIngredientList(ArrayList<Ingredient> ingList) {
         ArrayList<String> ingredientNames = new ArrayList<String>(
                 Arrays.asList("pork", "garlic", "ginger", "sugar", "soysauce"));
@@ -112,6 +128,11 @@ public class RecipeBook {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: creates new list of type string and loops through it to add each ingredient into ingredient list
+     * of type Ingredient.
+     */
     public void createVegIngredientList(ArrayList<Ingredient> ingList) {
         ArrayList<String> ingredientNames = new ArrayList<String>(
                 Arrays.asList("garlic", "soysauce", "bellpepper", "paprika", "onion", "mushrooms", "tortilla"));
@@ -122,6 +143,10 @@ public class RecipeBook {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: loops through each recipe in list of recipes and returns the number associated with that recipe.
+     */
     public Recipe getRecipeByNum(int num) {
         Recipe recipeMatch = null;
         for (Recipe r : recipes) {

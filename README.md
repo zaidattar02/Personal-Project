@@ -21,6 +21,8 @@ In conclusion, this is a problem I am personally facing and I hope this project 
 - As a user, I want to be able to save recipes I enjoyed to my favorites collection.
 - As a user, I want to be able to remove certain ingredients from recipes.
 - As a user, I want to be able to filter recipe presets for certain allergies or dietary restrictions.
+- As a user, I want to be able to save my favorites list and edited recipes to file.
+- As a user, I want to be able to load my favorites list and edited recipes from file.
 
 
 

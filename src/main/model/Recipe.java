@@ -2,9 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 //Represents a class Recipe having a name,list of ingredients,number and
 // boolean values:vegan,halal and if it contains nuts.
-public class Recipe {
+public class Recipe implements Writable {
     private String name;
     private boolean isVegan;
     private boolean isHalal;
@@ -100,4 +104,26 @@ public class Recipe {
         return recipeNumber;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("vegan", isVegan);
+        json.put("halal", isHalal);
+        json.put("nuts", containsNuts);
+        json.put("number", recipeNumber);
+        json.put("Ingredients", ingredientsToJson());
+        return json;
+    }
+
+    //EFFECTS: returns ingredients in this MyState as a JSON Array
+    private JSONArray ingredientsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Ingredient i : ingredients) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
 }

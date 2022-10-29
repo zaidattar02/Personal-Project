@@ -1,10 +1,14 @@
 package ui;
 
-import model.Ingredient;
+
+import model.MyState;
 import model.Recipe;
 import model.RecipeBook;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,9 +16,16 @@ public class RecipeApp {
     private ArrayList<Recipe> favorites;
     private Scanner input = new Scanner(System.in);
     private RecipeBook recipesList;
+    private MyState ms;
+    private static final String JSON_STORE = "./data/MyState.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-
-    public RecipeApp() {
+    //EFFECTS: Runs application
+    public RecipeApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        ms = new MyState("Zaid's state");
         runRecipe();
     }
 
@@ -53,6 +64,8 @@ public class RecipeApp {
         System.out.println("\tf -> filter");
         System.out.println("\ta -> add to favorites");
         System.out.println("\te -> edit recipes");
+        System.out.println("\ts -> save Favorites and Edited Recipes to file");
+        System.out.println("\tl -> load Favorites and Edited Recipes from file");
         System.out.println("\tq -> quit");
     }
 
@@ -65,6 +78,10 @@ public class RecipeApp {
             favorite();
         } else if (command.equals("e")) {
             deleteIngredient();
+        } else if (command.equals("s")) {
+            saveMyState();
+        } else if (command.equals("l")) {
+            loadMyState();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -81,6 +98,7 @@ public class RecipeApp {
         }
         String ingredientToRemove = input.next();
         recipeToEdit.removeIngredient(ingredientToRemove);
+        addEditedToState(recipeToEdit);
         System.out.println("Here is the updated recipe");
         recipeToEdit.printRecipe();
     }
@@ -100,17 +118,61 @@ public class RecipeApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds fav recipe to state
+    private void addFavToState(Recipe r) {
+        while (!favorites.contains(r)) {
+            ms.addFavorites(r);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds edited recipe to state
+    private void addEditedToState(Recipe r) {
+        ms.addEdited(r);
+    }
+
+
     public void favorite() {
         System.out.print("Enter the recipe number you want to add to favorites \n");
         recipesList.printRecipeNames();
         String userFav = input.next();
         Recipe favRecipe = recipesList.getRecipeByNum(Integer.parseInt(userFav));
-        favorites.add(favRecipe);
-        System.out.println("Added to favorites!");
+        if (favorites.contains(favRecipe)) {
+            System.out.println("This recipe is already in your favorites");
+        } else {
+            favorites.add(favRecipe);
+            addFavToState(favRecipe);
+            System.out.println("Added to favorites!");
+        }
+
     }
 
     public void printR() {
         recipesList.printRecipes();
+    }
+
+    // EFFECTS: saves the MyState to file
+    private void saveMyState() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(ms);
+            jsonWriter.close();
+            System.out.println("Saved " + ms.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads MyState from file
+    private void loadMyState() {
+        try {
+            ms = jsonReader.read();
+            System.out.println("Loaded " + ms.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 
