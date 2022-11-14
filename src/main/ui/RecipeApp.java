@@ -144,6 +144,7 @@ public class RecipeApp {
             System.out.println("Recipe is already in your favorites");
         } else {
             ms.addFavorites(r);
+            System.out.println("Added to favorites!");
         }
     }
 
@@ -163,7 +164,6 @@ public class RecipeApp {
         } else {
             favorites.add(favRecipe);
             addFavToState(favRecipe);
-            System.out.println("Added to favorites!");
         }
     }
 
