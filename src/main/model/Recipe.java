@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -126,4 +127,21 @@ public class Recipe implements Writable {
 
         return jsonArray;
     }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) {
+//            return true;
+//        }
+//        if (!(o instanceof Recipe)) {
+//            return false;
+//        }
+//        Recipe recipe = (Recipe) o;
+//        return isVegan == recipe.isVegan && isHalal == recipe.isHalal && containsNuts == recipe.containsNuts && recipeNumber == recipe.recipeNumber && name.equals(recipe.name) && ingredients.equals(recipe.ingredients);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(name, isVegan, isHalal, containsNuts, ingredients, recipeNumber);
+//    }
 }

@@ -1,6 +1,5 @@
 package ui;
 
-
 import model.MyState;
 import model.Recipe;
 import model.RecipeBook;
@@ -66,6 +65,8 @@ public class RecipeApp {
         System.out.println("\te -> edit recipes");
         System.out.println("\ts -> save Favorites and Edited Recipes to file");
         System.out.println("\tl -> load Favorites and Edited Recipes from file");
+        System.out.println("\tp -> print Favorites");
+        System.out.println("\tz -> print Edited Recipes");
         System.out.println("\tq -> quit");
     }
 
@@ -82,8 +83,26 @@ public class RecipeApp {
             saveMyState();
         } else if (command.equals("l")) {
             loadMyState();
+        } else if (command.equals("p")) {
+            printFav();
+        } else if (command.equals("z")) {
+            printEdited();
         } else {
             System.out.println("Selection not valid...");
+        }
+    }
+
+    public void printEdited() {
+        ArrayList<Recipe> editedInState = ms.getEdited();
+        for (Recipe r : editedInState) {
+            r.printRecipe();
+        }
+    }
+
+    public void printFav() {
+        ArrayList<Recipe> favoritesInState = ms.getFav();
+        for (Recipe r : favoritesInState) {
+            r.printRecipe();
         }
     }
 
@@ -121,7 +140,9 @@ public class RecipeApp {
     // MODIFIES: this
     // EFFECTS: adds fav recipe to state
     private void addFavToState(Recipe r) {
-        if (!ms.getFav().contains(r)) {
+        if (ms.getFav().contains(r)) {
+            System.out.println("Recipe is already in your favorites");
+        } else {
             ms.addFavorites(r);
         }
     }
@@ -131,7 +152,6 @@ public class RecipeApp {
     private void addEditedToState(Recipe r) {
         ms.addEdited(r);
     }
-
 
     public void favorite() {
         System.out.print("Enter the recipe number you want to add to favorites \n");
@@ -145,8 +165,8 @@ public class RecipeApp {
             addFavToState(favRecipe);
             System.out.println("Added to favorites!");
         }
-
     }
+
 
     public void printR() {
         recipesList.printRecipes();
