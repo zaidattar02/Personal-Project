@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a preset of recipes of type Recipe
-public class RecipeBook {
+public class RecipeBook implements Writable{
     private ArrayList<Recipe> recipes; //creates an ArrayList of type Recipe called recipes.
 
     /*
@@ -66,6 +66,14 @@ public class RecipeBook {
                 frecipe.remove(frecipe.get(i));
             }
             --i;
+        }
+    }
+
+    public boolean filterForVegan(int recipeNumber) {
+        if (this.recipes.get(recipeNumber - 1).isRecipeVegan()) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -161,14 +169,33 @@ public class RecipeBook {
 
 
     //EFFECTS: returns recipe names ArrayList of type strings
-    public ArrayList<String> getfavRecipeNames() {
-        ArrayList<String> recipeNames = new ArrayList<>();
+    public ArrayList<Recipe> getfavRecipeNames() {
+        ArrayList<Recipe> recipeNames = new ArrayList<>();
         for (Recipe r : recipes) {
             if (r.isFavourite()) {
-                recipeNames.add(String.valueOf(r.getRecipeNumber()) + ':' + r.getRecipeName());
+                recipeNames.add(r);
             }
         }
         return recipeNames;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("fav", favToJson());
+
+        return json;
+    }
+
+    // EFFECTS: returns favorites in this state as a JSON array
+    private JSONArray favToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Recipe re : getfavRecipeNames()) {
+            jsonArray.put(re.toJson());
+        }
+        return jsonArray;
     }
 
     public ArrayList<Recipe> getRecipes() {
@@ -176,12 +203,10 @@ public class RecipeBook {
     }
 
     public boolean addToFav(int recipeNumber) {
-        if (this.recipes.get(recipeNumber - 1).isFavourite()) {
-            return false;
-        } else {
-            this.recipes.get(recipeNumber - 1).setFavourite(true);
+
+            this.recipes.get(recipeNumber - 1).setFavourite(!this.recipes.get(recipeNumber - 1).isFavourite());
             return true;
-        }
+
     }
 }
 

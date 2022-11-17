@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 // Represents a reader that reads workroom from JSON data stored in file
@@ -22,7 +23,7 @@ public class JsonReader {
 
     // EFFECTS: reads workroom from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public MyState read() throws IOException {
+    public RecipeBook read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseMyState(jsonObject);
@@ -41,11 +42,10 @@ public class JsonReader {
 
     // MODIFIES: ms
     // EFFECTS: parses mystate from JSON object and returns it
-    private MyState parseMyState(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        MyState ms = new MyState(name);
+    private RecipeBook parseMyState(JSONObject jsonObject) {
+        RecipeBook ms = new RecipeBook();
         addFavorites(ms,jsonObject);
-        addEdited(ms,jsonObject);
+
         return ms;
     }
 
@@ -86,14 +86,16 @@ public class JsonReader {
 
     // MODIFIES: ms
     // EFFECTS: parses fav from JSON object and adds them to MyState
-    private void addFavorites(MyState ms, JSONObject jsonObject) {
+    private void addFavorites(RecipeBook ms, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("fav");
         for (int i = 0; i < jsonArray.length(); i++) {
             jsonObject = jsonArray.getJSONObject(i);
             Recipe r = readRecipe(jsonObject);
-            ms.addFavorites(r);
-            //for loop with call to read recipe and that recipe using addfavorites
-            // don't need addFav for this or edited
+            Optional<Recipe> bookRecipe = ms.getRecipeList().stream().filter(e -> e.getRecipeName().equals(r.getRecipeName())).findFirst();
+            if (bookRecipe.isPresent()) {
+                bookRecipe.get().setFavourite(true);
+            }
+
         }
     }
 

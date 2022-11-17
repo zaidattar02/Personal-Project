@@ -1,5 +1,6 @@
 package persistence;
 
+import model.RecipeBook;
 import org.json.JSONObject;
 
 import model.MyState;
@@ -28,6 +29,13 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of MyState to file
     public void write(MyState ms) {
+        JSONObject json = ms.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of MyState to file
+    public void write(RecipeBook ms) {
         JSONObject json = ms.toJson();
         saveToFile(json.toString(TAB));
     }
