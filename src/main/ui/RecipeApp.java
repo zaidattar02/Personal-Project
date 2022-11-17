@@ -88,7 +88,7 @@ public class RecipeApp {
         } else if (command.equals("s")) {
             saveMyState();
         } else if (command.equals("l")) {
-            loadMyState();
+            //loadMyState();
         } else if (command.equals("p")) {
             printFav();
         } else if (command.equals("z")) {
@@ -205,14 +205,14 @@ public class RecipeApp {
 
     // MODIFIES: this
     // EFFECTS: loads MyState from file
-    private void loadMyState() {
-        try {
-            ms = jsonReader.read();
-            System.out.println("Loaded " + ms.getName() + " from " + JSON_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
-        }
-    }
+//    private void loadMyState() {
+//        try {
+//            ms = jsonReader.read();
+//            System.out.println("Loaded " + ms.getName() + " from " + JSON_STORE);
+//        } catch (IOException e) {
+//            System.out.println("Unable to read from file: " + JSON_STORE);
+//        }
+//    }
 
 
 }
