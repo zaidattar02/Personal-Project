@@ -13,6 +13,7 @@ public class Recipe implements Writable {
     private String name;
     private boolean isVegan;
     private boolean isHalal;
+    private boolean isFavourite = false;
     private boolean containsNuts;
     private ArrayList<Ingredient> ingredients;
     private int recipeNumber;
@@ -143,5 +144,13 @@ public class Recipe implements Writable {
     @Override
     public int hashCode() {
         return Objects.hash(name, isVegan, isHalal, containsNuts, ingredients, recipeNumber);
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

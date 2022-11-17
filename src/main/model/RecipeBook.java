@@ -18,6 +18,7 @@ public class RecipeBook {
      */
     public RecipeBook() {
         this.recipes = new ArrayList<>();
+
         ArrayList<Ingredient> chkingr = new ArrayList<>();
         ArrayList<Ingredient> prkingr = new ArrayList<>();
         ArrayList<Ingredient> vegingr = new ArrayList<>();
@@ -159,6 +160,29 @@ public class RecipeBook {
     }
 
 
+    //EFFECTS: returns recipe names ArrayList of type strings
+    public ArrayList<String> getfavRecipeNames() {
+        ArrayList<String> recipeNames = new ArrayList<>();
+        for (Recipe r : recipes) {
+            if (r.isFavourite()) {
+                recipeNames.add(String.valueOf(r.getRecipeNumber()) + ':' + r.getRecipeName());
+            }
+        }
+        return recipeNames;
+    }
+
+    public ArrayList<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public boolean addToFav(int recipeNumber) {
+        if (this.recipes.get(recipeNumber - 1).isFavourite()) {
+            return false;
+        } else {
+            this.recipes.get(recipeNumber - 1).setFavourite(true);
+            return true;
+        }
+    }
 }
 
 

@@ -5,7 +5,9 @@ import model.Recipe;
 import model.RecipeBook;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import ui.RecipeGUI;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,9 +18,11 @@ public class RecipeApp {
     private Scanner input = new Scanner(System.in);
     private RecipeBook recipesList;
     private MyState ms;
+    private RecipeGUI recipeGUI = new RecipeGUI();
     private static final String JSON_STORE = "./data/MyState.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private JList<Recipe> favL;
 
     //EFFECTS: Runs application
     public RecipeApp() throws FileNotFoundException {
@@ -51,12 +55,13 @@ public class RecipeApp {
 
     }
 
+    //EFFECTS: initializes recipeBook and favorites list
     public void init() {
         recipesList = new RecipeBook();
         favorites = new ArrayList<>();
     }
 
-
+    //EFFECTS: prints the menu for user to interact with
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\tr -> print recipes");
@@ -70,6 +75,7 @@ public class RecipeApp {
         System.out.println("\tq -> quit");
     }
 
+    //EFFECTS: processes user input as command
     private void processCommand(String command) {
         if (command.equals("r")) {
             printR();
@@ -92,6 +98,7 @@ public class RecipeApp {
         }
     }
 
+    //EFFECTS: prints edited recipes in state
     public void printEdited() {
         ArrayList<Recipe> editedInState = ms.getEdited();
         for (Recipe r : editedInState) {
@@ -99,13 +106,18 @@ public class RecipeApp {
         }
     }
 
+    //EFFECTS: prints favorite recipes in state
     public void printFav() {
+//        MyState myState = recipeGUI.getMyState();
         ArrayList<Recipe> favoritesInState = ms.getFav();
+//        ArrayList<Recipe> favoritesInState = myState.getFav();
         for (Recipe r : favoritesInState) {
             r.printRecipe();
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Deletes selected ingredient from the recipe user chooses
     public void deleteIngredient() {
         System.out.println("Which recipe number would you like to edit");
         recipesList.printRecipeNames();
@@ -122,6 +134,8 @@ public class RecipeApp {
         recipeToEdit.printRecipe();
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints list of recipes that match the filter
     public void filterRestriction() {
         ArrayList<Recipe> filteredRecipes;
         filteredRecipes = new ArrayList<>(recipesList.getRecipeList());
@@ -139,12 +153,14 @@ public class RecipeApp {
 
     // MODIFIES: this
     // EFFECTS: adds fav recipe to state
-    private void addFavToState(Recipe r) {
+    public void addFavToState(Recipe r) {
         if (ms.getFav().contains(r)) {
             System.out.println("Recipe is already in your favorites");
         } else {
             ms.addFavorites(r);
             System.out.println("Added to favorites!");
+            //TODO: have a JList.add(r) after creating a Jlist
+
         }
     }
 
@@ -154,11 +170,14 @@ public class RecipeApp {
         ms.addEdited(r);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds user's favorite recipe to list of favorites
     public void favorite() {
         System.out.print("Enter the recipe number you want to add to favorites \n");
         recipesList.printRecipeNames();
         String userFav = input.next();
         Recipe favRecipe = recipesList.getRecipeByNum(Integer.parseInt(userFav));
+
         if (favorites.contains(favRecipe)) {
             System.out.println("This recipe is already in your favorites");
         } else {
@@ -167,7 +186,7 @@ public class RecipeApp {
         }
     }
 
-
+    //EFFECTS: prints the list of recipes
     public void printR() {
         recipesList.printRecipes();
     }
