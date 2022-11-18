@@ -26,12 +26,12 @@ public class JsonWriter {
         writer = new PrintWriter(new File(destination));
     }
 
-    // MODIFIES: this
-    // EFFECTS: writes JSON representation of MyState to file
-//    public void write(MyState ms) {
-//        JSONObject json = ms.toJson();
-//        saveToFile(json.toString(TAB));
-//    }
+//     MODIFIES: this
+//     EFFECTS: writes JSON representation of MyState to file
+    public void write(MyState ms) {
+        JSONObject json = ms.toJson();
+        saveToFile(json.toString(TAB));
+    }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of MyState to file

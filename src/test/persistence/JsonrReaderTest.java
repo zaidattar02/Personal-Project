@@ -8,19 +8,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//public class JsonrReaderTest {
-//
+//public class JsonReaderTest {
+
 //    @Test
 //    void testReaderNonExistentFile() {
 //        JsonReader reader = new JsonReader("./data/noSuchFile.json");
 //        try {
-//            MyState ms = reader.read();
+////            MyState ms = reader.read();
 //            fail("IOException expected");
-//        } catch (IOException e) {
+////        } catch (IOException e) {
 //            // pass
 //        }
 //    }
-//
+
 //    @Test
 //    void testReaderEmptyMyState() {
 //        JsonReader reader = new JsonReader("./data/testReaderEmptyMyState.json");
@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //            fail("Couldn't read from file");
 //        }
 //    }
-//
+
 //    @Test
 //    void testReaderGeneralWorkRoom() {
 //        JsonReader reader = new JsonReader("./data/testReaderGeneralMyState.json");
@@ -51,5 +51,5 @@ import static org.junit.jupiter.api.Assertions.*;
 //            fail("Couldn't read from file");
 //        }
 //    }
-//
+
 //        }

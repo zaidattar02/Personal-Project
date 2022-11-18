@@ -62,7 +62,7 @@ public class JsonWriterTest extends JsonTest {
             ms.addEdited(r);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralMyState.json");
             writer.open();
-//            writer.write(ms);
+            writer.write(ms);
             writer.close();
             JsonReader reader = new JsonReader("./data/testWriterGeneralMyState.json");
 //            ms = reader.read();

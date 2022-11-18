@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Ingredient implements Writable {
     private String name;
 
-    //EFFECTS: Contructs a new Ingredient with name set ingName
+    //EFFECTS: Contracts a new Ingredient with name set ingName
     public Ingredient(String ingName) {
         this.name = ingName;
     }

@@ -23,7 +23,7 @@ class RecipeBookTest {
     @Test
     void testConstructor() {
         ArrayList<String> recipeNames = new ArrayList<>(
-                Arrays.asList("1:Chicken Alfredo Pasta", "2:Vegetable Fajitas", "3:Mongolian Pork"));
+                Arrays.asList("1:Chicken Alfredo Pasta", "2:Vegetable Fajitas", "3:Mongolian Pork", "4:Broccoli Pasta"));
         ArrayList<String> rNames = firstBook.getRecipeNames();
         assertEquals(rNames, recipeNames);
     }
