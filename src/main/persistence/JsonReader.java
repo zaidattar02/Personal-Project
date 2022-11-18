@@ -41,7 +41,7 @@ public class JsonReader {
     }
 
     // MODIFIES: ms
-    // EFFECTS: parses mystate from JSON object and returns it
+    // EFFECTS: parses MYSTATE.json file from JSON object and returns it
     private RecipeBook parseMyState(JSONObject jsonObject) {
         RecipeBook ms = new RecipeBook();
         addFavorites(ms,jsonObject);
@@ -91,11 +91,14 @@ public class JsonReader {
         for (int i = 0; i < jsonArray.length(); i++) {
             jsonObject = jsonArray.getJSONObject(i);
             Recipe r = readRecipe(jsonObject);
-            Optional<Recipe> bookRecipe = ms.getRecipeList().stream().filter(e -> e.getRecipeName().equals(r.getRecipeName())).findFirst();
+            // GeTRecipeList returns ARRAY<Recipe>
+            // turn the recipe list to a stream and filter the stream to only contain first recipe who's name
+            // is equal to recipe name r.getRecipeName (from the MYSTATE.JSON)
+            Optional<Recipe> bookRecipe = ms.getRecipeList().stream().filter(e ->
+                    e.getRecipeName().equals(r.getRecipeName())).findFirst();
             if (bookRecipe.isPresent()) {
                 bookRecipe.get().setFavourite(true);
             }
-
         }
     }
 

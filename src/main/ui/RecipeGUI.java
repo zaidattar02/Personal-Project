@@ -2,6 +2,8 @@ package ui;
 
 import model.Recipe;
 import model.RecipeBook;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -10,6 +12,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class RecipeGUI implements ActionListener {
@@ -30,10 +34,12 @@ public class RecipeGUI implements ActionListener {
     private RecipeBook recipeBook = new RecipeBook();
     private DefaultListModel listModel;
     private DefaultListModel listModel2;
+    private DefaultListModel updatedListModel;
 
     private JList recipesList;
     private JList veganRecipes = new JList<>();
     private JList fav = new JList<>();
+    private JList savedFav = new JList<>();
     private JList halalInFav = new JList<>();
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -42,6 +48,8 @@ public class RecipeGUI implements ActionListener {
 
     //Runs the RecipeGUI and displays main frame
     public RecipeGUI() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         splashScreen();
         jsonReader = new JsonReader(JSON_STORE);
         initializePanels();
@@ -103,7 +111,7 @@ public class RecipeGUI implements ActionListener {
         halalPanelFav.setBounds(445, 300, 300, 300);
         halalPanelFav.setBorder(border);
         halalRecInFavLabel = new JLabel();
-        halalRecInFavLabel.setText("Hala recipes in your favorites");
+        halalRecInFavLabel.setText("Halal recipes in your favorites");
     }
 
     //MODIFIES: buttons
@@ -113,6 +121,7 @@ public class RecipeGUI implements ActionListener {
         loadButton.setVisible(true);
         loadButton.setLayout(null);
         loadButton.setSize(105, 50);
+        loadButton.addActionListener(this);
 
         filterHalalInFavButton.setBounds(450, 640, 100, 50);
         filterHalalInFavButton.setVisible(true);
@@ -130,23 +139,25 @@ public class RecipeGUI implements ActionListener {
         saveButton.setVisible(true);
         saveButton.setLayout(null);
         saveButton.setSize(105, 50);
+        saveButton.addActionListener(this);
     }
 
     //MODIFIES: this
     //EFFECTS: returns a JList of recipeNames
     private JList getRecipesJList() {
-        recipeBook = new RecipeBook();
         ArrayList<Recipe> arrayList = recipeBook.getRecipes();
         listModel = new DefaultListModel<>();
 
+        // listmodel has all the recipe names inside of it as elements
         for (Recipe recipe : arrayList) {
             listModel.addElement(recipe.getRecipeName());
         }
+        // recipesList is a Jlist created from listmodel
         recipesList = new JList<>(listModel);
         recipesList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
-                recipeBook.addToFav(recipesList.getSelectedIndex() + 1);
-                Recipe r = arrayList.get(recipesList.getSelectedIndex());
+                recipeBook.toggleFav(recipesList.getSelectedIndex() + 1); // toggles isFavorite field
+                //Recipe r = arrayList.get(recipesList.getSelectedIndex());
                 filterForFav();
             }
         });
@@ -191,17 +202,49 @@ public class RecipeGUI implements ActionListener {
     //MODIFIES: this
     //EFFECTS: loops through each recipe and returns a JList of the halal recipes
     private JList filterForHalalInFav() {
-        ArrayList<Recipe> recipeArrayList = recipeBook.getRecipes();
-        listModel2 = new DefaultListModel<>();
-
-        for (Recipe r : recipeArrayList) {
-            if (r.isRecipeHalal() && r.isFavourite()) {
-                listModel2.addElement(r.getRecipeName());
+        DefaultListModel listModelHalal;
+        listModelHalal = new DefaultListModel<>();
+        ArrayList<Recipe> halalRecipes = recipeBook.getHalalRecipes();
+        for (int i=0; i < fav.getModel().getSize(); i++){
+            for(Recipe r : halalRecipes) {
+                if (r.getRecipeName().equals(fav.getModel().getElementAt(i))){
+                    listModelHalal.addElement(fav.getModel().getElementAt(i));
+                }
             }
         }
-
-        halalInFav.setModel(listModel2);
+        halalInFav.setModel(listModelHalal);
         return halalInFav;
+    }
+
+    //EFFECTS: saves the current favorites of the RecipeApp to a Json file
+    private void saveFav(){
+        try {
+            jsonWriter.open();
+            jsonWriter.write(recipeBook);
+            jsonWriter.close();
+        }
+        catch(FileNotFoundException e){
+            throw new RuntimeException();
+        }
+    }
+
+    //MODIFIES: fav
+    //EFFECTS: updates favorites with the recipebook's favorites
+    private void updateFav(RecipeBook r){
+        updatedListModel = new DefaultListModel<>();
+        ArrayList<Recipe> updatesRecipe = new ArrayList<>();
+        try{
+            r = jsonReader.read(); // r is RecipeBook with favorites set to true for based on Mystate.json
+        }
+        catch(IOException e){
+            throw new RuntimeException();
+        }
+        JSONArray jsonArray = r.favToJson(); // returns favorites in this state as a JSON array of Recipe JSON objects
+        for(int i=0; i < jsonArray.length(); i++){
+            JSONObject recipe = jsonArray.getJSONObject(i);
+            updatedListModel.addElement(recipe.get("name"));
+        }
+        fav.setModel(updatedListModel);
     }
 
     @Override
@@ -210,6 +253,10 @@ public class RecipeGUI implements ActionListener {
             vegPanelRB.add(filterForVegan());
         } else if (e.getSource() == filterHalalInFavButton) {
             halalPanelFav.add(filterForHalalInFav());
+        } else if (e.getSource() == saveButton) {
+            saveFav();
+        } else if (e.getSource() == loadButton) {
+            updateFav(recipeBook);
         }
     }
 
@@ -224,7 +271,7 @@ public class RecipeGUI implements ActionListener {
         jLabel.setSize(size);
         window.getContentPane().add(jLabel);
         jLabel.setVisible(true);
-        window.setBounds(300, 300, 750, 750);
+        window.setBounds(300, 300, 600, 600);
         window.setVisible(true);
         try {
             Thread.sleep(800);

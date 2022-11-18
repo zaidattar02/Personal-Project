@@ -53,7 +53,6 @@ public class MyState implements Writable {
         return edited;
     }
 
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

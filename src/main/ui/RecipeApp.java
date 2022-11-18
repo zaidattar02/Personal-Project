@@ -86,7 +86,7 @@ public class RecipeApp {
         } else if (command.equals("e")) {
             deleteIngredient();
         } else if (command.equals("s")) {
-            saveMyState();
+            //saveMyState();
         } else if (command.equals("l")) {
             //loadMyState();
         } else if (command.equals("p")) {
@@ -192,16 +192,16 @@ public class RecipeApp {
     }
 
     // EFFECTS: saves the MyState to file
-    private void saveMyState() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(ms);
-            jsonWriter.close();
-            System.out.println("Saved " + ms.getName() + " to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-    }
+//    private void saveMyState() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.write(ms);
+//            jsonWriter.close();
+//            System.out.println("Saved " + ms.getName() + " to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//    }
 
     // MODIFIES: this
     // EFFECTS: loads MyState from file

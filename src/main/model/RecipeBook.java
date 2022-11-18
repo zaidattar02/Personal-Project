@@ -181,15 +181,25 @@ public class RecipeBook implements Writable {
     }
 
 
-    //EFFECTS: returns recipe names ArrayList of type strings
-    public ArrayList<Recipe> getfavRecipeNames() {
-        ArrayList<Recipe> recipeNames = new ArrayList<>();
-        for (Recipe r : recipes) {
+    //EFFECTS: returns favorites as a list of Recipes
+    public ArrayList<Recipe> getFavRecipes() {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        for (Recipe r : this.recipes) {
             if (r.isFavourite()) {
-                recipeNames.add(r);
+                recipes.add(r);
             }
         }
-        return recipeNames;
+        return recipes;
+    }
+
+    public ArrayList<Recipe> getHalalRecipes() {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        for (Recipe r : this.recipes) {
+            if (r.isRecipeHalal()) {
+                recipes.add(r);
+            }
+        }
+        return recipes;
     }
 
 
@@ -202,10 +212,10 @@ public class RecipeBook implements Writable {
     }
 
     // EFFECTS: returns favorites in this state as a JSON array
-    private JSONArray favToJson() {
+    public JSONArray favToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Recipe re : getfavRecipeNames()) {
+        for (Recipe re : getFavRecipes()) {
             jsonArray.put(re.toJson());
         }
         return jsonArray;
@@ -215,7 +225,7 @@ public class RecipeBook implements Writable {
         return recipes;
     }
 
-    public boolean addToFav(int recipeNumber) {
+    public boolean toggleFav(int recipeNumber) {
 
         this.recipes.get(recipeNumber - 1).setFavourite(!this.recipes.get(recipeNumber - 1).isFavourite());
         return true;
