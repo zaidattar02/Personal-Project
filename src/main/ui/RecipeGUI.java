@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class RecipeGUI implements ActionListener {
+    private ImageIcon image = new ImageIcon("./data/chef.jpeg");
     private JPanel recipeBookPanel;
     private JPanel recipeFavPanel;
     private JPanel vegPanelRB;
@@ -23,7 +24,6 @@ public class RecipeGUI implements ActionListener {
     private JLabel halalRecInFavLabel;
     private JFrame frame = new JFrame("RecipeBook");
     private JButton loadButton = new JButton("Load");
-    private JButton showFavButton = new JButton("Display Favorites");
     private JButton filterHalalInFavButton = new JButton("Halal Recipes in Favorites");
     private JButton filterVeganButton = new JButton("Vegan Recipes in Book");
     private JButton saveButton = new JButton("Save");
@@ -40,11 +40,12 @@ public class RecipeGUI implements ActionListener {
     private static final String JSON_STORE = "./data/MyState.json";
     Border border = BorderFactory.createLineBorder(Color.black, 3);
 
+    //Runs the RecipeGUI and displays main frame
     public RecipeGUI() {
+        splashScreen();
         jsonReader = new JsonReader(JSON_STORE);
         initializePanels();
         initializeButtons();
-        frame.setVisible(true);
         recipeBookPanel.add(recipeBookLabel);
         vegPanelRB.add(veganRecipes);
         vegPanelRB.add(vegRecInBookLabel);
@@ -57,6 +58,13 @@ public class RecipeGUI implements ActionListener {
         frame.setLayout(null);
         frame.setSize(750, 750);
         frame.setResizable(true);
+        addToFrame();
+
+    }
+
+    //MODIFIES: frame
+    //EFFECTS: adds panels to frame
+    private void addToFrame() {
         frame.add(recipeBookPanel);
         frame.add(vegPanelRB);
         frame.add(recipeFavPanel);
@@ -67,6 +75,8 @@ public class RecipeGUI implements ActionListener {
         frame.add(saveButton);
     }
 
+    //MODIFIES: panels
+    //EFFECTS: initializes all panels in GUI
     private void initializePanels() {
         recipeBookPanel = new JPanel();
         recipeBookPanel.setBackground(Color.LIGHT_GRAY);
@@ -96,17 +106,13 @@ public class RecipeGUI implements ActionListener {
         halalRecInFavLabel.setText("Hala recipes in your favorites");
     }
 
+    //MODIFIES: buttons
+    //EFFECTS: initializes all buttons in GUI and adds listeners to them
     private void initializeButtons() {
         loadButton.setBounds(0, 640, 100, 50);
         loadButton.setVisible(true);
         loadButton.setLayout(null);
         loadButton.setSize(105, 50);
-
-//        showFavButton.setBounds(125, 640, 100, 50);
-//        showFavButton.setVisible(true);
-//        showFavButton.setLayout(null);
-//        showFavButton.setSize(150, 50);
-//        showFavButton.addActionListener(this);
 
         filterHalalInFavButton.setBounds(450, 640, 100, 50);
         filterHalalInFavButton.setVisible(true);
@@ -126,6 +132,8 @@ public class RecipeGUI implements ActionListener {
         saveButton.setSize(105, 50);
     }
 
+    //MODIFIES: this
+    //EFFECTS: returns a JList of recipeNames
     private JList getRecipesJList() {
         recipeBook = new RecipeBook();
         ArrayList<Recipe> arrayList = recipeBook.getRecipes();
@@ -146,6 +154,8 @@ public class RecipeGUI implements ActionListener {
         return recipesList;
     }
 
+    //MODIFIES: this
+    //EFFECTS: loops through each recipe and returns a JList of the vegan recipes
     private JList filterForVegan() {
         ArrayList<Recipe> recipeArrayList = recipeBook.getRecipes();
         //recipeArrayList = recipeBook.getRecipes();
@@ -161,6 +171,8 @@ public class RecipeGUI implements ActionListener {
         return veganRecipes;
     }
 
+    //MODIFIES: this
+    //EFFECTS: loops through each recipe and returns a JList of the favorite recipes
     private JList filterForFav() {
         ArrayList<Recipe> recipeArrayList = recipeBook.getRecipes();
         //recipeArrayList = recipeBook.getRecipes();
@@ -176,6 +188,8 @@ public class RecipeGUI implements ActionListener {
         return fav;
     }
 
+    //MODIFIES: this
+    //EFFECTS: loops through each recipe and returns a JList of the halal recipes
     private JList filterForHalalInFav() {
         ArrayList<Recipe> recipeArrayList = recipeBook.getRecipes();
         listModel2 = new DefaultListModel<>();
@@ -198,4 +212,31 @@ public class RecipeGUI implements ActionListener {
             halalPanelFav.add(filterForHalalInFav());
         }
     }
+
+    //MODIFIES: frame
+    //EFFECTS: displays a Splash Screen with an image before main frame is displayed
+    public void splashScreen() {
+        frame.setVisible(false);
+        JWindow window = new JWindow();
+        Dimension size = window.getSize();
+        JLabel jLabel = new JLabel();
+        jLabel.setIcon(image);
+        jLabel.setSize(size);
+        window.getContentPane().add(jLabel);
+        jLabel.setVisible(true);
+        window.setBounds(300, 300, 750, 750);
+        window.setVisible(true);
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        window.setVisible(false);
+        frame.setVisible(true);
+        window.dispose();
+    }
 }
+
+
+
+

@@ -8,11 +8,11 @@ public class Main {
         try {
             new RecipeGUI();
             new RecipeApp();
+
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
 
         }
-
 
     }
 }
