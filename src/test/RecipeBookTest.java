@@ -38,9 +38,16 @@ class RecipeBookTest {
     }
 
     @Test
-    void testgetRecipes() {
+    void testGetRecipes() {
         ArrayList<Recipe> recipes = firstBook.getRecipes();
         assertEquals(4,recipes.size());
+    }
+
+    @Test
+    void testToggleFav() {
+       firstBook.toggleFav(1);
+       assertTrue(recipes.get(0).isFavourite());
+       assertFalse(recipes.get(1).isFavourite());
     }
 
     @Test
