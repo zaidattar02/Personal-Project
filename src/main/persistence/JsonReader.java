@@ -104,13 +104,13 @@ public class JsonReader {
 
     // MODIFIES: ms
     // EFFECTS: parses edited from JSON object and adds them to MyState
-    private void addEdited(MyState ms, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("edited");
-        for (int i = 0; i < jsonArray.length(); i++) {
-            jsonObject = jsonArray.getJSONObject(i);
-            Recipe r = readRecipe(jsonObject);
-            ms.addEdited(r);
-        }
-    }
+//    private void addEdited(MyState ms, JSONObject jsonObject) {
+//        JSONArray jsonArray = jsonObject.getJSONArray("edited");
+//        for (int i = 0; i < jsonArray.length(); i++) {
+//            jsonObject = jsonArray.getJSONObject(i);
+//            Recipe r = readRecipe(jsonObject);
+//            ms.addEdited(r);
+//        }
+//    }
 
 }
