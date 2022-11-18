@@ -7,6 +7,8 @@ import model.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -27,6 +29,7 @@ class RecipeTest {
     private int recipeNumber;
     private boolean containsNuts;
     private ArrayList<Ingredient> ingredients;
+
 
 
     @BeforeEach
@@ -109,10 +112,10 @@ class RecipeTest {
         assertFalse(ingRemovedString.contains("garlic"));
     }
 
-    @Test
-    void testPrintRecipe(){
-        assertFalse(recipe2.getRecipeName().isEmpty());
-    }
+//    @Test
+//    void testPrintRecipe(){
+//        recipe2.printRecipe();
+//    }
 
 
     @Test

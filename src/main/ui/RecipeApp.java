@@ -90,31 +90,31 @@ public class RecipeApp {
         } else if (command.equals("l")) {
             //loadMyState();
         } else if (command.equals("p")) {
-            printFav();
+            //printFav();
         } else if (command.equals("z")) {
-            printEdited();
+            //printEdited();
         } else {
             System.out.println("Selection not valid...");
         }
     }
 
     //EFFECTS: prints edited recipes in state
-    public void printEdited() {
-        ArrayList<Recipe> editedInState = ms.getEdited();
-        for (Recipe r : editedInState) {
-            r.printRecipe();
-        }
-    }
+//    public void printEdited() {
+//        ArrayList<Recipe> editedInState = ms.getEdited();
+//        for (Recipe r : editedInState) {
+//            r.printRecipe();
+//        }
+//    }
 
     //EFFECTS: prints favorite recipes in state
-    public void printFav() {
-//        MyState myState = recipeGUI.getMyState();
-        ArrayList<Recipe> favoritesInState = ms.getFav();
-//        ArrayList<Recipe> favoritesInState = myState.getFav();
-        for (Recipe r : favoritesInState) {
-            r.printRecipe();
-        }
-    }
+//    public void printFav() {
+////        MyState myState = recipeGUI.getMyState();
+//        ArrayList<Recipe> favoritesInState = ms.getFav();
+////        ArrayList<Recipe> favoritesInState = myState.getFav();
+//        for (Recipe r : favoritesInState) {
+//            r.printRecipe();
+//        }
+//    }
 
     // MODIFIES: this
     // EFFECTS: Deletes selected ingredient from the recipe user chooses
@@ -131,7 +131,7 @@ public class RecipeApp {
         recipeToEdit.removeIngredient(ingredientToRemove);
         addEditedToState(recipeToEdit);
         System.out.println("Here is the updated recipe");
-        recipeToEdit.printRecipe();
+        //recipeToEdit.printRecipe();
     }
 
     // MODIFIES: this

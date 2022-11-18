@@ -51,13 +51,13 @@ public class Recipe implements Writable {
      * REQUIRES: Ingredients and Recipe name is not null
      * EFFECTS: returns recipe's name and ingredients of each recipe
      */
-    public void printRecipe() {
-        System.out.println("Recipe: " + " " + getRecipeName());
-        System.out.println("Ingredients: ");
-        for (int i = 0; i < ingredients.size(); i++) {
-            System.out.println(ingredients.get(i).getIngredientName());
-        }
-    }
+//    public void printRecipe() {
+//        System.out.println("Recipe: " + " " + getRecipeName());
+//        System.out.println("Ingredients: ");
+//        for (int i = 0; i < ingredients.size(); i++) {
+//            System.out.println(ingredients.get(i).getIngredientName());
+//        }
+//    }
 
     /*
      *REQUIRES: Ingredients and Recipe name is not null
