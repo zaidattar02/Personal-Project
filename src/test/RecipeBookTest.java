@@ -38,6 +38,12 @@ class RecipeBookTest {
     }
 
     @Test
+    void testgetRecipes() {
+        ArrayList<Recipe> recipes = firstBook.getRecipes();
+        assertEquals(4,recipes.size());
+    }
+
+    @Test
     void testFilterByRestriction() {
         ArrayList<Recipe> filteredRecipes = firstBook.getRecipeList();
         firstBook.filterByRestriction("vegan", filteredRecipes);
@@ -49,6 +55,13 @@ class RecipeBookTest {
         firstBook.filterByRestriction("halal", filteredRecipes);
         for (Recipe fr : filteredRecipes) {
             assertNotEquals("3:Mongolian Pork", fr.getRecipeName());
+        }
+    }
+    @Test
+    void testGetHalalRecipes(){
+        ArrayList<Recipe> halalRecipes = firstBook.getHalalRecipes();
+        for (Recipe r : halalRecipes){
+            assertNotEquals(r.getRecipeName(),"Mongolian Pork");
         }
     }
 

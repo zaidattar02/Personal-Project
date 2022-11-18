@@ -72,20 +72,12 @@ public class RecipeBook implements Writable {
         }
     }
 
-    public boolean filterForVegan(int recipeNumber) {
-        if (this.recipes.get(recipeNumber - 1).isRecipeVegan()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     //EFFECTS: loops through each recipe in list of recipes and prints its name using method getRecipeName
-    public void printRecipeNames() {
-        for (Recipe r : recipes) {
-            System.out.println(String.valueOf(r.getRecipeNumber()) + ':' + r.getRecipeName());
-        }
-    }
+//    public void printRecipeNames() {
+//        for (Recipe r : recipes) {
+//            System.out.println(String.valueOf(r.getRecipeNumber()) + ':' + r.getRecipeName());
+//        }
+//    }
 
     //EFFECTS: returns recipe names ArrayList of type strings
     public ArrayList<String> getRecipeNames() {
@@ -97,18 +89,18 @@ public class RecipeBook implements Writable {
     }
 
     //EFFECTS: loops through each recipe in list of recipes and prints out its name and list of ingredients
-    public void printRecipes() {
-        for (Recipe r : recipes) {
-            System.out.println("Recipe " + r.getRecipeName());
-            System.out.println("Ingredients: ");
-            ArrayList<Ingredient> ings = r.getIngredients();
-            for (int i = 0; i < ings.size(); i++) {
-                System.out.println(ings.get(i).getIngredientName());
-            }
-            System.out.println(" ");
-        }
-
-    }
+//    public void printRecipes() {
+//        for (Recipe r : recipes) {
+//            System.out.println("Recipe " + r.getRecipeName());
+//            System.out.println("Ingredients: ");
+//            ArrayList<Ingredient> ings = r.getIngredients();
+//            for (int i = 0; i < ings.size(); i++) {
+//                System.out.println(ings.get(i).getIngredientName());
+//            }
+//            System.out.println(" ");
+//        }
+//
+//    }
 
     /*
      * MODIFIES: this

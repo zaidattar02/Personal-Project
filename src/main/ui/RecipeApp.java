@@ -78,7 +78,7 @@ public class RecipeApp {
     //EFFECTS: processes user input as command
     private void processCommand(String command) {
         if (command.equals("r")) {
-            printR();
+//            printR();
         } else if (command.equals("f")) {
             filterRestriction();
         } else if (command.equals("a")) {
@@ -120,7 +120,7 @@ public class RecipeApp {
     // EFFECTS: Deletes selected ingredient from the recipe user chooses
     public void deleteIngredient() {
         System.out.println("Which recipe number would you like to edit");
-        recipesList.printRecipeNames();
+//        recipesList.printRecipeNames();
         String recipeToEditNum = input.next();
         Recipe recipeToEdit = recipesList.getRecipeByNum(Integer.parseInt(recipeToEditNum));
         System.out.println("Which ingredient from the following would you like to remove");
@@ -174,7 +174,7 @@ public class RecipeApp {
     //EFFECTS: adds user's favorite recipe to list of favorites
     public void favorite() {
         System.out.print("Enter the recipe number you want to add to favorites \n");
-        recipesList.printRecipeNames();
+//        recipesList.printRecipeNames();
         String userFav = input.next();
         Recipe favRecipe = recipesList.getRecipeByNum(Integer.parseInt(userFav));
 
@@ -187,9 +187,9 @@ public class RecipeApp {
     }
 
     //EFFECTS: prints the list of recipes
-    public void printR() {
-        recipesList.printRecipes();
-    }
+//    public void printR() {
+//        recipesList.printRecipes();
+//    }
 
     // EFFECTS: saves the MyState to file
 //    private void saveMyState() {
