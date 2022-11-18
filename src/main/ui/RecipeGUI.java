@@ -205,9 +205,9 @@ public class RecipeGUI implements ActionListener {
         DefaultListModel listModelHalal;
         listModelHalal = new DefaultListModel<>();
         ArrayList<Recipe> halalRecipes = recipeBook.getHalalRecipes();
-        for (int i=0; i < fav.getModel().getSize(); i++){
-            for(Recipe r : halalRecipes) {
-                if (r.getRecipeName().equals(fav.getModel().getElementAt(i))){
+        for (int i = 0; i < fav.getModel().getSize(); i++) {
+            for (Recipe r : halalRecipes) {
+                if (r.getRecipeName().equals(fav.getModel().getElementAt(i))) {
                     listModelHalal.addElement(fav.getModel().getElementAt(i));
                 }
             }
@@ -217,30 +217,28 @@ public class RecipeGUI implements ActionListener {
     }
 
     //EFFECTS: saves the current favorites of the RecipeApp to a Json file
-    private void saveFav(){
+    private void saveFav() {
         try {
             jsonWriter.open();
             jsonWriter.write(recipeBook);
             jsonWriter.close();
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new RuntimeException();
         }
     }
 
     //MODIFIES: fav
     //EFFECTS: updates favorites with the recipebook's favorites
-    private void updateFav(RecipeBook r){
+    private void updateFav(RecipeBook r) {
         updatedListModel = new DefaultListModel<>();
         ArrayList<Recipe> updatesRecipe = new ArrayList<>();
-        try{
+        try {
             r = jsonReader.read(); // r is RecipeBook with favorites set to true for based on Mystate.json
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException();
         }
         JSONArray jsonArray = r.favToJson(); // returns favorites in this state as a JSON array of Recipe JSON objects
-        for(int i=0; i < jsonArray.length(); i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject recipe = jsonArray.getJSONObject(i);
             updatedListModel.addElement(recipe.get("name"));
         }
@@ -266,11 +264,11 @@ public class RecipeGUI implements ActionListener {
         frame.setVisible(false);
         JWindow window = new JWindow();
         Dimension size = window.getSize();
-        JLabel jLabel = new JLabel();
-        jLabel.setIcon(image);
-        jLabel.setSize(size);
-        window.getContentPane().add(jLabel);
-        jLabel.setVisible(true);
+        JLabel jlabel = new JLabel();
+        jlabel.setIcon(image);
+        jlabel.setSize(size);
+        window.getContentPane().add(jlabel);
+        jlabel.setVisible(true);
         window.setBounds(300, 300, 600, 600);
         window.setVisible(true);
         try {

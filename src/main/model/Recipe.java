@@ -138,7 +138,9 @@ public class Recipe implements Writable {
             return false;
         }
         Recipe recipe = (Recipe) o;
-        return isVegan == recipe.isVegan && isHalal == recipe.isHalal && containsNuts == recipe.containsNuts && recipeNumber == recipe.recipeNumber && name.equals(recipe.name) && ingredients.equals(recipe.ingredients);
+        return isVegan == recipe.isVegan && isHalal == recipe.isHalal
+                && containsNuts == recipe.containsNuts && recipeNumber == recipe.recipeNumber
+                && name.equals(recipe.name) && ingredients.equals(recipe.ingredients);
     }
 
     @Override

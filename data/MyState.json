@@ -1,5 +1,20 @@
 {"fav": [
     {
+        "number": 1,
+        "nuts": false,
+        "Ingredients": [
+            {"name": "chicken"},
+            {"name": "pasta"},
+            {"name": "butter"},
+            {"name": "oregano"},
+            {"name": "basil"},
+            {"name": "parmesan"}
+        ],
+        "name": "Chicken Alfredo Pasta",
+        "halal": true,
+        "vegan": false
+    },
+    {
         "number": 2,
         "nuts": false,
         "Ingredients": [
@@ -14,19 +29,5 @@
         "name": "Vegetable Fajitas",
         "halal": true,
         "vegan": true
-    },
-    {
-        "number": 3,
-        "nuts": true,
-        "Ingredients": [
-            {"name": "pork"},
-            {"name": "garlic"},
-            {"name": "ginger"},
-            {"name": "sugar"},
-            {"name": "soysauce"}
-        ],
-        "name": "Mongolian Pork",
-        "halal": false,
-        "vegan": false
     }
 ]}
