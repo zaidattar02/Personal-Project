@@ -31,6 +31,6 @@ In conclusion, this is a problem I am personally facing and I hope this project 
 - You can generate another event related to displaying a subset of favorite recipes that are halal by pressing the Halal Recipes In Favorite button which will display all the halal recipes in your favorites in a panel.
 - You can locate my visual component when you first run the GUI as a splash screen.
 - You can save the state of my application by pressing the Save button.
-- You can reload the state of my application by pressing the Load button.
+- You can reload the state of my application by pressing the Load button, which will display all saved favorites in the favorite panel.
 
  

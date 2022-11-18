@@ -110,6 +110,12 @@ class RecipeTest {
     }
 
     @Test
+    void testPrintRecipe(){
+        assertFalse(recipe2.getRecipeName().isEmpty());
+    }
+
+
+    @Test
     void testSetFav(){
         recipe2.setFavourite(true);
         assertTrue(recipe2.isFavourite());
