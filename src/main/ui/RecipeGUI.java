@@ -1,7 +1,9 @@
 package ui;
 
+import model.Event;
 import model.Recipe;
 import model.RecipeBook;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.JsonReader;
@@ -31,6 +33,7 @@ public class RecipeGUI implements ActionListener {
     private JButton filterHalalInFavButton = new JButton("Halal Recipes in Favorites");
     private JButton filterVeganButton = new JButton("Vegan Recipes in Book");
     private JButton saveButton = new JButton("Save");
+    private JButton exitButton = new JButton("Exit");
     private RecipeBook recipeBook = new RecipeBook();
     private DefaultListModel listModel;
     private DefaultListModel listModel2;
@@ -81,6 +84,7 @@ public class RecipeGUI implements ActionListener {
         frame.add(filterHalalInFavButton);
         frame.add(filterVeganButton);
         frame.add(saveButton);
+        frame.add(exitButton);
     }
 
     //MODIFIES: panels
@@ -140,6 +144,12 @@ public class RecipeGUI implements ActionListener {
         saveButton.setLayout(null);
         saveButton.setSize(105, 50);
         saveButton.addActionListener(this);
+
+        exitButton.setBounds(325,640,100,50);
+        exitButton.setVisible(true);
+        exitButton.setForeground(Color.red);
+        exitButton.setSize(100,50);
+        exitButton.addActionListener(this);
     }
 
     //MODIFIES: this
@@ -157,7 +167,6 @@ public class RecipeGUI implements ActionListener {
         recipesList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 recipeBook.toggleFav(recipesList.getSelectedIndex() + 1); // toggles isFavorite field
-                //Recipe r = arrayList.get(recipesList.getSelectedIndex());
                 filterForFav();
             }
         });
@@ -169,7 +178,6 @@ public class RecipeGUI implements ActionListener {
     //EFFECTS: loops through each recipe and returns a JList of the vegan recipes
     private JList filterForVegan() {
         ArrayList<Recipe> recipeArrayList = recipeBook.getRecipes();
-        //recipeArrayList = recipeBook.getRecipes();
         listModel2 = new DefaultListModel<>();
 
         for (Recipe r : recipeArrayList) {
@@ -186,7 +194,6 @@ public class RecipeGUI implements ActionListener {
     //EFFECTS: loops through each recipe and returns a JList of the favorite recipes
     private JList filterForFav() {
         ArrayList<Recipe> recipeArrayList = recipeBook.getRecipes();
-        //recipeArrayList = recipeBook.getRecipes();
         listModel2 = new DefaultListModel<>();
 
         for (Recipe r : recipeArrayList) {
@@ -245,6 +252,12 @@ public class RecipeGUI implements ActionListener {
         fav.setModel(updatedListModel);
     }
 
+    public void printLog(EventLog e){
+        for (Event next: e){
+            System.out.println(next.toString() + "\n\n");
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == filterVeganButton) {
@@ -255,7 +268,11 @@ public class RecipeGUI implements ActionListener {
             saveFav();
         } else if (e.getSource() == loadButton) {
             updateFav(recipeBook);
+        } else if(e.getSource() == exitButton){
+            printLog(EventLog.getInstance());
+            System.exit(0);
         }
+
     }
 
     //MODIFIES: frame

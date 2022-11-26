@@ -1,14 +1,31 @@
-{"fav": [{
-    "number": 3,
-    "nuts": true,
-    "Ingredients": [
-        {"name": "pork"},
-        {"name": "garlic"},
-        {"name": "ginger"},
-        {"name": "sugar"},
-        {"name": "soysauce"}
-    ],
-    "name": "Mongolian Pork",
-    "halal": false,
-    "vegan": false
-}]}
+{"fav": [
+    {
+        "number": 3,
+        "nuts": true,
+        "Ingredients": [
+            {"name": "pork"},
+            {"name": "garlic"},
+            {"name": "ginger"},
+            {"name": "sugar"},
+            {"name": "soysauce"}
+        ],
+        "name": "Mongolian Pork",
+        "halal": false,
+        "vegan": false
+    },
+    {
+        "number": 4,
+        "nuts": true,
+        "Ingredients": [
+            {"name": "pasta"},
+            {"name": "broccoli"},
+            {"name": "onion"},
+            {"name": "garlic"},
+            {"name": "nuts"},
+            {"name": "beans"}
+        ],
+        "name": "Broccoli Pasta",
+        "halal": true,
+        "vegan": true
+    }
+]}

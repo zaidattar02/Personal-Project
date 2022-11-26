@@ -33,7 +33,7 @@ public class RecipeBook implements Writable {
                 true, true, false, vegingr, 2));
         recipes.add(new Recipe("Mongolian Pork",
                 false, false, true, prkingr, 3));
-        recipes.add(new Recipe("Broccoli Pasta",true,true,true,brocIngr,4));
+        recipes.add(new Recipe("Broccoli Pasta", true, true, true, brocIngr, 4));
     }
 
     public ArrayList<Recipe> getRecipeList() {
@@ -149,7 +149,7 @@ public class RecipeBook implements Writable {
 
     public void createBrocIngredientList(ArrayList<Ingredient> ingList) {
         ArrayList<String> ingredientNames = new ArrayList<String>(
-                Arrays.asList("pasta","broccoli","onion","garlic","nuts","beans"));
+                Arrays.asList("pasta", "broccoli", "onion", "garlic", "nuts", "beans"));
         for (String i : ingredientNames) {
             Ingredient ing;
             ing = new Ingredient(i);
@@ -191,6 +191,7 @@ public class RecipeBook implements Writable {
                 recipes.add(r);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Filtered Favorites for Halal Recipes"));
         return recipes;
     }
 
@@ -218,12 +219,14 @@ public class RecipeBook implements Writable {
     }
 
     public boolean toggleFav(int recipeNumber) {
-
+        boolean toggle = false;
+        //find a way to have a condition where you can check if it is being added or removed -> have accurate event log
         this.recipes.get(recipeNumber - 1).setFavourite(!this.recipes.get(recipeNumber - 1).isFavourite());
+        EventLog.getInstance().logEvent(new Event("Added Recipe to Favorites"));
         return true;
-
     }
 }
+
 
 
 

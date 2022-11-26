@@ -95,6 +95,7 @@ public class Recipe implements Writable {
     }
 
     public boolean isRecipeVegan() {
+        EventLog.getInstance().logEvent(new Event("Checking if " + getRecipeName() + " in recipe book is Vegan"));
         return isVegan;
     }
 
