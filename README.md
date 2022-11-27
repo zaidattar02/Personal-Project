@@ -33,4 +33,38 @@ In conclusion, this is a problem I am personally facing and I hope this project 
 - You can save the state of my application by pressing the Save button.
 - You can reload the state of my application by pressing the Load button, which will display all saved favorites in the favorite panel.
 
- 
+### Phase 4: Task 2
+
+- This is a sample of event logs of a user checking for vegan recipes in recipebook -> Adds mongolian pork and chicken alfredo pasta to favorites-> Filters through favorites to check for Halal recipes -> Removes mongolian pork from favorites:
+
+Sat Nov 26 20:58:24 PST 2022
+Checking if Chicken Alfredo Pasta in recipe book is Vegan
+
+
+Sat Nov 26 20:58:24 PST 2022
+Checking if Vegetable Fajitas in recipe book is Vegan
+
+
+Sat Nov 26 20:58:24 PST 2022
+Checking if Mongolian Pork in recipe book is Vegan
+
+
+Sat Nov 26 20:58:24 PST 2022
+Checking if Broccoli Pasta in recipe book is Vegan
+
+
+Sat Nov 26 20:58:29 PST 2022
+Added Mongolian Pork to favorites
+
+
+Sat Nov 26 20:58:31 PST 2022
+Added Chicken Alfredo Pasta to favorites
+
+
+Sat Nov 26 20:58:33 PST 2022
+Filtered Favorites for Halal Recipes
+
+
+Sat Nov 26 20:58:36 PST 2022
+Removed Mongolian Pork from favorites
+

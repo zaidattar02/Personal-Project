@@ -122,33 +122,28 @@ public class RecipeGUI implements ActionListener {
     //EFFECTS: initializes all buttons in GUI and adds listeners to them
     private void initializeButtons() {
         loadButton.setBounds(0, 640, 100, 50);
-        loadButton.setVisible(true);
         loadButton.setLayout(null);
         loadButton.setSize(105, 50);
         loadButton.addActionListener(this);
 
         filterHalalInFavButton.setBounds(450, 640, 100, 50);
-        filterHalalInFavButton.setVisible(true);
         filterHalalInFavButton.setLayout(null);
         filterHalalInFavButton.setSize(175, 50);
         filterHalalInFavButton.addActionListener(this);
 
         filterVeganButton.setBounds(125, 640, 100, 50);
-        filterVeganButton.setVisible(true);
         filterVeganButton.setLayout(null);
         filterVeganButton.setSize(175, 50);
         filterVeganButton.addActionListener(this);
 
         saveButton.setBounds(640, 640, 100, 50);
-        saveButton.setVisible(true);
         saveButton.setLayout(null);
         saveButton.setSize(105, 50);
         saveButton.addActionListener(this);
 
-        exitButton.setBounds(325,640,100,50);
-        exitButton.setVisible(true);
+        exitButton.setBounds(325, 640, 100, 50);
         exitButton.setForeground(Color.red);
-        exitButton.setSize(100,50);
+        exitButton.setSize(100, 50);
         exitButton.addActionListener(this);
     }
 
@@ -252,8 +247,8 @@ public class RecipeGUI implements ActionListener {
         fav.setModel(updatedListModel);
     }
 
-    public void printLog(EventLog e){
-        for (Event next: e){
+    public void printLog(EventLog e) {
+        for (Event next : e) {
             System.out.println(next.toString() + "\n\n");
         }
     }
@@ -268,11 +263,10 @@ public class RecipeGUI implements ActionListener {
             saveFav();
         } else if (e.getSource() == loadButton) {
             updateFav(recipeBook);
-        } else if(e.getSource() == exitButton){
+        } else if (e.getSource() == exitButton) {
             printLog(EventLog.getInstance());
             System.exit(0);
         }
-
     }
 
     //MODIFIES: frame
