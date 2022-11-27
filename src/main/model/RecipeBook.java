@@ -218,12 +218,15 @@ public class RecipeBook implements Writable {
         return recipes;
     }
 
-    public boolean toggleFav(int recipeNumber) {
-        boolean toggle = false;
-        //find a way to have a condition where you can check if it is being added or removed -> have accurate event log
-        this.recipes.get(recipeNumber - 1).setFavourite(!this.recipes.get(recipeNumber - 1).isFavourite());
-        EventLog.getInstance().logEvent(new Event("Added Recipe to Favorites"));
-        return true;
+    public void toggleFav(int recipeNumber) {
+        Recipe r = recipes.get(recipeNumber - 1);
+        if (r.isFavourite()) {
+            r.setFavourite(false);
+            EventLog.getInstance().logEvent(new Event("Removed " + r.getRecipeName() + " from favorites"));
+        } else if (!r.isFavourite()) {
+            r.setFavourite(true);
+            EventLog.getInstance().logEvent(new Event("Added " + r.getRecipeName() + " to favorites"));
+        }
     }
 }
 
