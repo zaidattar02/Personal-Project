@@ -3,7 +3,7 @@ package persistence;
 import model.RecipeBook;
 import org.json.JSONObject;
 
-import model.MyState;
+//import model.MyState;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -28,10 +28,10 @@ public class JsonWriter {
 
 //     MODIFIES: this
 //     EFFECTS: writes JSON representation of MyState to file
-    public void write(MyState ms) {
-        JSONObject json = ms.toJson();
-        saveToFile(json.toString(TAB));
-    }
+//    public void write(MyState ms) {
+//        JSONObject json = ms.toJson();
+//        saveToFile(json.toString(TAB));
+//    }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of MyState to file

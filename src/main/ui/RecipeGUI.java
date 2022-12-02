@@ -247,6 +247,7 @@ public class RecipeGUI implements ActionListener {
         fav.setModel(updatedListModel);
     }
 
+    //EFFECTS: Loops through each Even in EventLog e and prints it using the toString method
     public void printLog(EventLog e) {
         for (Event next : e) {
             System.out.println(next.toString() + "\n\n");

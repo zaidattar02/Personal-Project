@@ -72,12 +72,7 @@ public class RecipeBook implements Writable {
         }
     }
 
-    //EFFECTS: loops through each recipe in list of recipes and prints its name using method getRecipeName
-//    public void printRecipeNames() {
-//        for (Recipe r : recipes) {
-//            System.out.println(String.valueOf(r.getRecipeNumber()) + ':' + r.getRecipeName());
-//        }
-//    }
+
 
     //EFFECTS: returns recipe names ArrayList of type strings
     public ArrayList<String> getRecipeNames() {
@@ -88,19 +83,7 @@ public class RecipeBook implements Writable {
         return recipeNames;
     }
 
-    //EFFECTS: loops through each recipe in list of recipes and prints out its name and list of ingredients
-//    public void printRecipes() {
-//        for (Recipe r : recipes) {
-//            System.out.println("Recipe " + r.getRecipeName());
-//            System.out.println("Ingredients: ");
-//            ArrayList<Ingredient> ings = r.getIngredients();
-//            for (int i = 0; i < ings.size(); i++) {
-//                System.out.println(ings.get(i).getIngredientName());
-//            }
-//            System.out.println(" ");
-//        }
-//
-//    }
+
 
     /*
      * MODIFIES: this
@@ -147,6 +130,11 @@ public class RecipeBook implements Writable {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: creates new list of type string and loops through it to add each ingredient into ingredient list
+     * of type Ingredient.
+     */
     public void createBrocIngredientList(ArrayList<Ingredient> ingList) {
         ArrayList<String> ingredientNames = new ArrayList<String>(
                 Arrays.asList("pasta", "broccoli", "onion", "garlic", "nuts", "beans"));
@@ -218,6 +206,8 @@ public class RecipeBook implements Writable {
         return recipes;
     }
 
+    //MODIFIES: Recipe
+    //EFFECTS: Acts as a toggle by switching the recipe's isFavourtie field from true to false or false to true
     public void toggleFav(int recipeNumber) {
         Recipe r = recipes.get(recipeNumber - 1);
         if (r.isFavourite()) {
