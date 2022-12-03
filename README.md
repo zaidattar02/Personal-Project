@@ -68,3 +68,10 @@ Filtered Favorites for Halal Recipes
 Sat Nov 26 20:58:36 PST 2022
 Removed Mongolian Pork from favorites
 
+### Phase 4: Task 3
+
+- There is duplication in the RecipeBook class with the four methods that create a list of ingredients for each recipe, instead I could have applied the Composite Pattern design with the RecipeBook, Recipe, and ingredients classes. 
+- Another way to refactor the three methods would be putting them all in one method to reduce duplication.
+- The filter for Halal and filter for Vegan methods in the RecipeGUI also have duplication which could be reduced by pulling the code clones into methods.
+- Using a hash map for the Recipe object with the key being the recipe’s name as a String and the value being the recipe’s associated list of ingredients.
+- Based on my previous point, by doing so I would not have an ingredients class and instead have it as a list in the Recipe class’ field, which would have a more cohesive and focused class and in turn reduce coupling.
